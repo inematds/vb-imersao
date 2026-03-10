@@ -45,9 +45,8 @@
     html:not(.dark) .border-blue-500\/30 { border-color: rgba(37, 99, 235, 0.25); }
     html:not(.dark) .hover\:bg-blue-500\/30:hover { background-color: rgba(37, 99, 235, 0.18); }
 
-    /* Light mode - header gradient fix */
-    html:not(.dark) .from-blue-900\/30 { --tw-gradient-from: rgba(37, 99, 235, 0.08); }
-    html:not(.dark) .to-dark-800 { --tw-gradient-to: #f0f7ff; }
+    /* Light mode - remove gradientes (fundo uniforme) */
+    html:not(.dark) [class*="bg-gradient-to"] { background-image: none !important; }
 
     /* Light mode - cores especiais */
     html:not(.dark) .text-primary { color: #a16207; }
