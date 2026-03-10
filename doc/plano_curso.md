@@ -110,3 +110,35 @@ Dados pesquisa: Governance-as-Code, Digital DNA, usage/outcome-based pricing, Ze
 | T5 Multibots | Teal | Dia 3 T5 | 6 | Sistema multibot |
 | T6 Operacao | Rose | Dia 3 T6 | 6 | Deploy final |
 | **TOTAL** | | **6** | **36** | **6** |
+
+---
+
+## DECISOES TECNICAS
+
+### Padronizacao de layout das trilhas (2026-03-10)
+
+**Problema:** As trilhas 1 e 4 tinham um layout HTML diferente das trilhas 2, 3, 5 e 6.
+
+**Causa:** T1 foi a primeira trilha criada e usou um formato proprio. Quando as trilhas 2-6 foram geradas por agentes paralelos, eles produziram um formato diferente (e mais limpo). T4 foi reescrita manualmente numa sessao anterior copiando o formato de T1 em vez de seguir o padrao majoritario.
+
+**Diferencas que existiam:**
+
+| Aspecto | T1/T4 (antigo) | T2/T3/T5/T6 (padrao) |
+|---------|----------------|----------------------|
+| Topic toggle | `toggleTopic('topic-1')` por ID string | `toggleTopic(this)` por elemento |
+| Topic CSS | `.topic-content` com `max-height` animation | `.topic-explanation` com `display:none/block` |
+| Topic content | `<strong>` inline em `<p>` tags | `<span class="font-semibold">` em `<div>` separados |
+| Modal | `.modal-overlay` + `.modal-box` custom CSS | `.modal.hidden` com Tailwind classes |
+| Modal open | `openModal()` sem args, iframe hardcoded | `openModal('modal-id')` com ID param |
+| Botoes | SVG icons inline nos botoes | Texto simples "Ver em Modal" / "Ver Completo" |
+| Max width | `max-w-4xl` (mais estreito) | `max-w-6xl` (mais largo, consistente) |
+| Module card | `.module-card` com hover transform | `rounded-xl border` sem hover effect |
+| Header | `<header>` centralizado com `text-center` | `<header>` alinhado esquerda |
+
+**Resolucao:** T1 e T4 reescritas para seguir o padrao de T2/T3/T5/T6. Todas as 6 trilhas agora usam:
+- `toggleTopic(this)` com `.topic-item` / `.topic-explanation.active`
+- Modal `.modal.hidden` com `openModal('modal-id')` / `closeModal()`
+- Botoes "Ver em Modal" + "Ver Completo" no footer `bg-dark-700/30`
+- Topics com emoji + titulo + subtitulo no botao
+- Conteudo em `bg-dark-700/50 rounded-lg` cards
+- `max-w-6xl`, navegacao rapida, divisor "Conteudo Detalhado"
